@@ -17,15 +17,9 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-    }
-
-    useEffect(() => {
+        debugger
         debounceFunc(userPassword)
-    }, [userPassword])
-
-    useEffect(() => {
-        debounceFunc(userConfirmationPassword)
-    }, [userConfirmationPassword])
+    }
 
     return (
         <div className="align-left">
@@ -35,13 +29,15 @@ function Form() {
                     type="text"
                     value={userPassword}
                     onChange={(e) => handleUserPasswordChange(e)}
+                    placeholder="please enter your password"
                 />
                 <input
                     type="text"
                     value={userConfirmationPassword}
                     onChange={(e) => handleConfirmationPasswordChange(e)}
+                    placeholder="please enter confirmation password"
                 />
-                <button onClick={() => handleSubmit}>Submit</button>
+                <button onClick={(e) => handleSubmit(e)}>Submit</button>
             </form>
         </div>
     )
