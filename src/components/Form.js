@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { debounce } from 'throttle-debounce'
 
-import { validateString, debounceFunc } from '../utils/helper'
+import {
+    validateString,
+    debounceFunc,
+    doesContainCapLetter,
+    doesContainSpecChar,
+} from '../utils/helper'
 
 function Form() {
     const [userPassword, setUserPassword] = useState('')
@@ -17,8 +22,8 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        debugger
-        debounceFunc(userPassword)
+
+        console.log(validateString(userPassword))
     }
 
     return (
