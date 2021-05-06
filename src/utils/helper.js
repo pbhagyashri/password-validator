@@ -1,75 +1,36 @@
-import { debounce } from 'throttle-debounce'
-
-export const debounceFunc = debounce(1000, (string) => {
-    validateString(string)
-})
-
-export const validateString = (password) => {
+export const validatePassword = (password) => {
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[[{}@$\]!%|#^*?*&,_\-.:;+=><])[A-Za-z\d\\[{}@$\]!%|#^*?*&,_\-.:;+=><]{6,}$/
+    return re.test(password)
+}
+
+export const findPasswordError = (password) => {
     const capital = /^(?=.*[A-Z])/
     const smallLetter = /^(?=.*[a-z])/
-    const specialChar = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[[{}@$\]!%|#^*?*&,_\-.:;+=><])/
-    const length = /(?=.*[[{}@$\]!%|#^*?*&,_\-.:;+=><])/
+    const specialChar = /(?=.*[[{}@$\]!%|#^*?*&,_\-.:;+=><])/
     const numbers = /(?=.*\d)/
 
     let errors = ''
 
-    if (re.test(password)) {
-        return true
-        console.log('valid password')
-    } else {
-        if (!capital.test(password)) {
-            errors = 'must contain atleast 1 capital letter'
-        }
-        if (!smallLetter.test(password)) {
-            errors = 'must contain atleast 1 small letter'
-        }
-        if (!specialChar.test(password)) {
-            errors = 'must contain atleast 1 special char'
-        }
-        if (!numbers.test(password)) {
-            errors = 'must contain atleast 1 number'
-        }
+    if (!smallLetter.test(password)) {
+        errors = 'Must contain at-least 1 small letter'
+    }
+    if (!capital.test(password)) {
+        errors = 'Must contain at-least 1 capital letter'
+    }
+    if (!specialChar.test(password)) {
+        errors = 'Must contain a special character(#$%&!..)'
+    }
+    if (!numbers.test(password)) {
+        errors = 'Must contain at-least 1 number'
+    }
+    if (password.length < 6) {
+        errors = 'Must be 6 characters long'
     }
 
-    console.log(errors)
-    return errors
-    // if (!capital.test(password)) {
-    //     console.log('must contain atleast 1 capital letter')
-    // } else if (!smallLetter.test(password)) {
-    //     console.log('must contain atleast 1 small letter')
-    // } else if (!specialChar) {
-    //     console.log('must contain atleast 1 special char')
-    // } else if (
-    //     capital.test(password) &&
-    //     smallLetter.test(password) &&
-    //     !specialChar
-    // ) {
-    //     console.log('must contain atleast 1 special char!!')
-    // } else {
-    //     console.log('did not match anything')
-    // }
-    // const isValidPass = false
-
-    // if (re.test(password)) {
-    //     isValidPass = true
-    // } else if (!capital.test(password)) {
-    //     console.log('not capital')
-    // } else if (!smallLetter) {
-    //     console.log('not small')
-    // } else if (!specialChar) {
-    //     console.log('not specialChar')
-    // } else if (!length) {
-    //     console.log('not long enough')
-    // }
+    //run validatePassword to validate password as a whole as an extra precaution.
+    return errors || validatePassword(password)
 }
 
-export const doesContainCapLetter = (password) => {
-    const capital = /^(?=.*[A-Z])/
-    return capital.test(password)
-}
-
-export const doesContainSpecChar = (password) => {
-    const specialChar = /(?=.*[@$!%*?&])/
-    return specialChar.test(password)
+export const doesPasswordMatch = (userInput, originalPassword) => {
+    return userInput.trim() === originalPassword || 'Password must match'
 }

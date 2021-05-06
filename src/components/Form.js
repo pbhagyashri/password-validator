@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { debounce } from 'throttle-debounce'
-
 import {
-    validateString,
-    debounceFunc,
-    doesContainCapLetter,
-    doesContainSpecChar,
+    validatePassword,
+    findPasswordError,
+    doesPasswordMatch,
 } from '../utils/helper'
+import { debounce } from 'throttle-debounce'
 
 function Form() {
     const [userPassword, setUserPassword] = useState('')
     const [userConfirmationPassword, setuserConfirmationPassword] = useState('')
+    const [passwordErrors, setPasswordErrors] = useState('')
 
     const handleUserPasswordChange = (e) => {
         setUserPassword(e.target.value)
+        // debounce(700, false, () => {
+        //     setPasswordErrors(findPasswordError(userPassword))
+        // })()
     }
 
     const handleConfirmationPasswordChange = (e) => {
@@ -22,19 +24,22 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        console.log(validateString(userPassword))
+        setPasswordErrors(findPasswordError(userPassword))
+        //console.log(doesPasswordMatch(userConfirmationPassword, userPassword))
+        // console.log('valid password')
     }
 
     return (
         <div className="align-left">
             <h1>Please Login</h1>
-            <form>
+            <p>{passwordErrors}</p>
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <input
                     type="text"
                     value={userPassword}
                     onChange={(e) => handleUserPasswordChange(e)}
                     placeholder="please enter your password"
+                    required
                 />
                 <input
                     type="text"
@@ -42,7 +47,7 @@ function Form() {
                     onChange={(e) => handleConfirmationPasswordChange(e)}
                     placeholder="please enter confirmation password"
                 />
-                <button onClick={(e) => handleSubmit(e)}>Submit</button>
+                <button>Submit</button>
             </form>
         </div>
     )
