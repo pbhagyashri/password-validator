@@ -10,7 +10,6 @@ export const findPasswordError = (password) => {
     const numbers = /(?=.*\d)/
 
     let errors = ''
-
     if (!smallLetter.test(password)) {
         errors = 'Must contain at-least 1 small letter'
     }
@@ -27,8 +26,7 @@ export const findPasswordError = (password) => {
         errors = 'Must be 6 characters long'
     }
 
-    //run validatePassword to validate password as a whole as an extra precaution.
-    return errors || validatePassword(password)
+    return errors || false
 }
 
 export const doesPasswordMatch = (userInput, originalPassword) => {

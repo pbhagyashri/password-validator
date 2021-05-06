@@ -7,12 +7,12 @@ body {
     font-size: 16px;
     margin: 0;
     padding: 0;
-    background-color: #eefbfb;
+    background-color: variables.$darkBlue;
 }
 
 .app-cont {
     height: 100vh;
-    color: #eefbfb;
+    color: variables.$darkBlue;
 }
 
 h1 {
@@ -28,10 +28,19 @@ p {
     font-size: 1.2rem;
 }
 
+input {
+    display: inline-block;
+    width: 80%;
+    padding: 13px 10px;
+    border: 1px solid variables.$darkBlue;
+    border-radius: 5px;
+}
+
 button {
-    border: none;
+    background: variables.$white;
     margin-top: 40px;
     padding: 15px;
+    border: 2px solid variables.$darkBlue;
     border-radius: 5px;
     width: 150px;
     font-weight: bold;

@@ -10,12 +10,10 @@ function Form() {
     const [userPassword, setUserPassword] = useState('')
     const [userConfirmationPassword, setuserConfirmationPassword] = useState('')
     const [passwordErrors, setPasswordErrors] = useState('')
+    const [confPasswordErrors, setConfPasswordErrors] = useState('')
 
     const handleUserPasswordChange = (e) => {
         setUserPassword(e.target.value)
-        // debounce(700, false, () => {
-        //     setPasswordErrors(findPasswordError(userPassword))
-        // })()
     }
 
     const handleConfirmationPasswordChange = (e) => {
@@ -25,31 +23,48 @@ function Form() {
     const handleSubmit = (e) => {
         e.preventDefault()
         setPasswordErrors(findPasswordError(userPassword))
-        //console.log(doesPasswordMatch(userConfirmationPassword, userPassword))
-        // console.log('valid password')
+        setConfPasswordErrors(
+            doesPasswordMatch(userConfirmationPassword, userPassword)
+        )
     }
 
+    useEffect(() => {
+        console.log(`passwordErrors`, passwordErrors.length)
+    })
+
     return (
-        <div className="align-left">
+        <>
             <h1>Please Login</h1>
-            <p>{passwordErrors}</p>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <input
-                    type="text"
-                    value={userPassword}
-                    onChange={(e) => handleUserPasswordChange(e)}
-                    placeholder="please enter your password"
-                    required
-                />
-                <input
-                    type="text"
-                    value={userConfirmationPassword}
-                    onChange={(e) => handleConfirmationPasswordChange(e)}
-                    placeholder="please enter confirmation password"
-                />
-                <button>Submit</button>
+            <form onSubmit={(e) => handleSubmit(e)} className="login-form">
+                <div className="login-form__input-cont">
+                    <input
+                        className={
+                            passwordErrors && 'login-form__input-with-errors'
+                        }
+                        type="text"
+                        value={userPassword}
+                        onChange={(e) => handleUserPasswordChange(e)}
+                        placeholder="please enter your password"
+                        required
+                    />
+                    <span className="error-message">{passwordErrors}</span>
+                </div>
+                <div className="login-form__input-cont">
+                    <input
+                        className={
+                            passwordErrors && 'login-form__input-with-errors'
+                        }
+                        type="text"
+                        value={userConfirmationPassword}
+                        onChange={(e) => handleConfirmationPasswordChange(e)}
+                        placeholder="please enter confirmation password"
+                        required
+                    />
+                    <span className="error-message">{confPasswordErrors}</span>
+                </div>
+                <button className="login-form__btn">Submit</button>
             </form>
-        </div>
+        </>
     )
 }
 

@@ -1,15 +1,26 @@
+@use 'variables';
+
+.login-form {
+    &__input-cont {
+        height: 80px;
+    }
+    &__btn {
+        display: block;
+        margin: 10px 0 0 0;
+        transition: color 0.5s, background 0.5s ease-in-out;
+    }
+    &__btn:hover {
+        background: variables.$darkBlueAlpha;
+        color: variables.$white;
+    }
+    &__input-with-errors {
+        border: 1px solid variables.$error;
+    }
+}
+
 .form-cont {
     width: 50%;
     min-height: 500px;
-    background: #203647;
+    background: variables.$white;
     padding: 0 20px;
-}
-
-input {
-    display: inline-block;
-    width: 80%;
-    padding: 13px 10px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 20px;
 }
