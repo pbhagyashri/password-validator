@@ -81,7 +81,6 @@ export default function Form() {
                                 handleConfirmationPasswordChange(e)
                             }
                             placeholder="please enter confirmation password"
-                            // required
                         />
                         <span className="error-message">
                             {confPasswordErrors}

@@ -15,7 +15,7 @@ export default function App() {
                         <Home />
                     </Route>
                     <Route exact path="/success">
-                        <Success className="align-center" />
+                        <Success />
                     </Route>
                 </Switch>
             </div>
