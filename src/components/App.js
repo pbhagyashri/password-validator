@@ -1,15 +1,24 @@
-import '../styles/index.scss'
 import React from 'react'
+
+import '../styles/index.scss'
+import Home from './Home'
+import Success from './Success'
 import Form from './Form'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 export default function App() {
     return (
-        <>
-            <main className="app-cont align-center">
-                <section className="form-cont">
-                    <Form />
-                </section>
-            </main>
-        </>
+        <Router>
+            <div>
+                <Switch>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                    <Route exact path="/success">
+                        <Success className="align-center" />
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
     )
 }

@@ -21,6 +21,16 @@
     font-size: 0.8rem;
 }
 
+.success-message-cont {
+    background-color: variables.$white;
+    width: 300px;
+    height: 150px;
+}
+
+.success-message {
+    color: variables.$darkBlue;
+}
+
 @font-face {
     font-family: 'robotoRegular';
     src: url('../assets/Roboto-Regular.woff') format('woff');

@@ -16,11 +16,14 @@
     &__input-with-errors {
         border: 1px solid variables.$error;
     }
+    &__input-with-no-errors {
+        border: 1px solid variables.$noError;
+    }
 }
 
-.form-cont {
-    width: 50%;
-    min-height: 500px;
-    background: variables.$white;
-    padding: 0 20px;
-}
+// .form-cont {
+//     width: 50%;
+//     min-height: 45vh;
+//     background: variables.$white;
+//     padding: 0 20px;
+// }
